@@ -1,0 +1,17 @@
+# Auto Payoff & Loan Calculator
+
+A free tool to calculate your auto loan payoff amount and monthly payments.
+
+## Features
+- **Payoff Calculator**: Estimate payoff amount, months to payoff, and interest saved with extra payments.
+- **Loan Calculator**: Calculate monthly payments, total cost, and amortization schedule with tax and fees.
+- Responsive design for mobile and desktop.
+
+## Deployment
+1. Clone this repository.
+2. Deploy to Cloudflare Pages via GitHub.
+   - Build command: None (static site).
+   - Output directory: `/` (root).
+
+## License
+MIT License © 2025

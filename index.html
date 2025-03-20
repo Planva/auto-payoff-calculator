@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Use our Auto Payoff Calculator to calculate your car loan payoff and savings with prepayments.">
+    <meta name="keywords" content="auto loan payoff calculator, auto payoff calculator, auto loan early payoff calculator, auto early payoff calculator, early payoff auto loan calculator, auto loan payoff early calculator, loan payoff calculator auto, payoff auto loan early calculator, payoff calculator auto loan, early auto loan payoff calculator">
+    <meta name="author" content="Auto Payoff Calculator">
+    <meta name="robots" content="index, follow">
+    <title>Auto Payoff Calculator - Calculate Loan Payoff and Savings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://www.yourwebsite.com/auto-payoff-calculator">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+Devanagari&family=Noto+Sans+Bengali&family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <label for="language-select">Language: </label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="zh">Chinese</option>
+                <option value="hi">हिन्दी</option>
+                <option value="es">Español</option>
+                <option value="bn">বাংলা</option>
+                <option value="ru">Русский</option>
+                <option value="pt">Português</option>
+                <option value="ur">اردو </option>
+                <option value="id">Bahasa Indonesia</option>
+                <option value="ha">Hausa</option>
+            </select>
+        </div>
+        <h1>Auto Payoff Calculator</h1>
+        <p>Calculate your car loan payoff and savings easily.</p>
+        <nav>
+            <ul>
+                <li><a href="#payoff-calculator" id="payoff-tab" class="active">Payoff Calculator</a></li>
+                <li><a href="#loan-calculator" id="loan-tab">Loan Calculator</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Payoff Calculator Section -->
+        <section id="payoff-calculator" class="calculator-section">
+            <div class="calculator-form">
+                <h2>Prepayment Calculation</h2>
+                <form id="payoff-form">
+                    <div class="form-group">
+                        <label for="payoff-loan-amount">Loan Amount ($):</label>
+                        <input type="number" id="payoff-loan-amount" name="payoff-loan-amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-total-term">Total Loan Term (months):</label>
+                        <input type="number" id="payoff-total-term" name="payoff-total-term" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-monthly-payment">Monthly Payment ($):</label>
+                        <input type="number" id="payoff-monthly-payment" name="payoff-monthly-payment" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-months-paid">Months Already Paid (months):</label>
+                        <input type="number" id="payoff-months-paid" name="payoff-months-paid" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-interest-rate">Interest Rate (%):</label>
+                        <input type="number" id="payoff-interest-rate" name="payoff-interest-rate" step="0.01">
+                        <small>Leave blank to calculate automatically</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-type">Prepayment Type:</label>
+                        <select id="payoff-type" name="payoff-type">
+                            <option value="none">No Prepayment</option>
+                            <option value="monthly">Monthly Prepayment</option>
+                            <option value="lump-sum">Lump Sum Prepayment</option>
+                            <option value="pay-off-early">Pay Off Early</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="prepayment-amount-group">
+                        <label for="payoff-prepayment-amount">Prepayment Amount ($):</label>
+                        <input type="number" id="payoff-prepayment-amount" name="payoff-prepayment-amount" value="0">
+                        <small>Additional amount for monthly prepayment or lump sum</small>
+                    </div>
+                    <div class="form-group" id="prepayment-timing-group">
+                        <label for="payoff-prepayment-timing">Prepayment Timing (months from now):</label>
+                        <input type="number" id="payoff-prepayment-timing" name="payoff-prepayment-timing" value="1">
+                        <small>When the lump sum or payoff will occur</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="payoff-other-fees">Other Fees ($):</label>
+                        <input type="number" id="payoff-other-fees" name="payoff-other-fees" value="0">
+                        <small>Prepayment penalties or other fees</small>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+            </div>
+
+            <div class="calculator-results">
+                <h2>Interest Savings: <span id="interest-savings">$0</span></h2>
+                <div class="payoff-summary" id="payoff-summary">
+                    <p><strong>Calculated Interest Rate:</strong> <span id="calculated-interest-rate">0%</span></p>
+                    <p><strong>Remaining Balance:</strong> <span id="remaining-balance">$0</span></p>
+                    <p><strong>Original Interest (Remaining Term):</strong> <span id="original-interest">$0</span></p>
+                    <p><strong>New Interest with Prepayment:</strong> <span id="new-interest">$0</span></p>
+                    <p><strong>Total Loan Term:</strong> <span id="total-term">0 months</span></p>
+                    <p><strong>Remaining Term (Without Prepayment):</strong> <span id="remaining-term">0 months</span></p>
+                    <p><strong>New Loan Term with Prepayment:</strong> <span id="new-term">0 months</span></p>
+                    <p><strong>Total Cost with Prepayment:</strong> <span id="total-cost-prepayment">$0</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loan Calculator Section -->
+        <section id="loan-calculator" class="calculator-section" style="display: none;">
+            <div class="calculator-form">
+                <h2>Loan Calculator</h2>
+                <form id="loan-form">
+                    <div class="form-group">
+                        <label for="auto-price">Auto Price ($):</label>
+                        <input type="number" id="auto-price" name="auto-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="down-payment">Down Payment ($):</label>
+                        <input type="number" id="down-payment" name="down-payment" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loan-term">Loan Term (months):</label>
+                        <input type="number" id="loan-term" name="loan-term" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">Your State:</label>
+                        <select id="state" name="state">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                            <option value="OT">Other</option>
+
+
+                            <!-- Add more states as needed -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sales-tax">Sales Tax (%):</label>
+                        <input type="number" id="sales-tax" name="sales-tax" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest-rate">Interest Rate (%):</label>
+                        <input type="number" id="interest-rate" name="interest-rate" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="other-fees">Other Fees ($):</label>
+                        <input type="number" id="other-fees" name="other-fees">
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+            </div>
+
+            <div class="calculator-results">
+                <h2>Monthly Pay: <span id="monthly-pay">$0</span></h2>
+                <div class="loan-summary">
+                    <p><strong>Total Loan Amount:</strong> <span id="total-loan">$0</span></p>
+                    <p><strong>Sales Tax:</strong> <span id="sales-tax-result">$0</span></p>
+                    <p><strong>Upfront Payment:</strong> <span id="upfront-payment">$0</span></p>
+                    <p><strong>Total of Payments:</strong> <span id="total-payments">$0</span></p>
+                    <p><strong>Total Loan Interest:</strong> <span id="total-interest">$0</span></p>
+                    <p><strong>Total Cost (interest, tax, fees):</strong> <span id="total-cost">$0</span></p>
+                </div>
+                <h3>Amortization Schedule</h3>
+                <div class="table-container">
+                    <table id="amortization-table">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Payment</th>
+                                <th>Interest</th>
+                                <th>Principal</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <div id="terms-explanation" class="keywords-container">
+            <h2>Understanding Auto Loan Terms</h2>
+            <p>Learn about the key terms related to auto loans and payoff calculators to make informed financial decisions.</p>
+        
+            <section class="keyword-section">
+                <h2>Interest Rate</h2>
+                <p>The interest rate is the percentage charged by a lender on the borrowed amount of your auto loan. It determines how much extra you’ll pay on top of the loan principal over time, typically expressed as an annual percentage rate (APR).</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Loan Term</h2>
+                <p>The loan term is the length of time you have to repay your auto loan, usually measured in months. A longer loan term means lower monthly payments but higher total interest, while a shorter term reduces interest but increases monthly payments.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Principal</h2>
+                <p>The principal is the original amount of money you borrow for your auto loan, excluding interest, taxes, and fees. It’s the base amount that you’ll repay over the loan term, and it decreases as you make payments.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Monthly Payment</h2>
+                <p>The monthly payment is the fixed amount you pay each month to repay your auto loan. It includes both the principal and interest, and sometimes taxes or fees, depending on your loan agreement.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Remaining Balance</h2>
+                <p>The remaining balance is the amount of your auto loan that you still owe at a given point in time. It decreases as you make payments and can be reduced faster with prepayments.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Prepayment</h2>
+                <p>Prepayment refers to paying extra money toward your auto loan beyond the required monthly payment. This can reduce your remaining balance, save on interest, and shorten your loan term.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Lump Sum Prepayment</h2>
+                <p>A lump sum prepayment is a one-time extra payment made toward your auto loan. It directly reduces the principal, leading to interest savings and potentially a shorter loan term.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Monthly Prepayment</h2>
+                <p>Monthly prepayment involves adding an extra amount to your regular monthly payment. This consistent extra payment reduces your principal over time, saving you interest and shortening the loan term.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Pay Off Early</h2>
+                <p>Paying off early means settling your auto loan in full before the end of the original loan term. This can save you significant interest and free you from debt sooner.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Interest Savings</h2>
+                <p>Interest savings refer to the amount of money you save on interest by making prepayments or paying off your auto loan early. It’s calculated as the difference between the original interest and the new interest after prepayments.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Total Loan Amount</h2>
+                <p>The total loan amount is the full amount you borrow for your auto loan, including the principal, sales tax, and any additional fees, minus your down payment.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Down Payment</h2>
+                <p>A down payment is the initial amount you pay upfront when purchasing a car with a loan. It reduces the total loan amount, lowering your monthly payments and interest costs.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Sales Tax</h2>
+                <p>Sales tax is a percentage-based tax applied to the purchase price of your car. It’s often included in the total loan amount if not paid upfront, increasing the amount you borrow.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Other Fees</h2>
+                <p>Other fees include additional costs associated with your auto loan, such as registration fees, documentation fees, or prepayment penalties. These fees can increase the total cost of your loan.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Amortization Schedule</h2>
+                <p>An amortization schedule is a table that shows the breakdown of each monthly payment over the life of your auto loan. It details how much of each payment goes toward interest, principal, and the remaining balance.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Total Cost</h2>
+                <p>The total cost of your auto loan is the sum of all payments you’ll make, including the principal, interest, sales tax, and other fees. It represents the full price of borrowing.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>New Loan Term</h2>
+                <p>The new loan term is the adjusted length of time it will take to pay off your auto loan after making prepayments. It’s typically shorter than the original loan term due to extra payments.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Remaining Term</h2>
+                <p>The remaining term is the number of months left to pay off your auto loan without any prepayments. It’s calculated as the original loan term minus the months you’ve already paid.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Total of Payments</h2>
+                <p>The total of payments is the sum of all monthly payments you’ll make over the life of your auto loan. It includes both principal and interest, reflecting the full repayment amount.</p>
+            </section>
+        
+            <section class="keyword-section">
+                <h2>Upfront Payment</h2>
+                <p>An upfront payment is the initial amount you pay when taking out your auto loan, typically the down payment. It reduces the loan amount and can lower your overall interest costs.</p>
+            </section>
+        </div>
+        <!-- Keywords Explanation Section -->
+        <div id="keywords-explanation" class="keywords-container">
+            <h2>Understanding Auto Loan Payoff Calculators</h2>
+            <p>Learn more about the terms related to auto loan payoff calculators and how they can help you save on your car loan.</p>
+
+            <section class="keyword-section">
+                <h2>Auto Loan Payoff Calculator</h2>
+                <p>An auto loan payoff calculator helps you determine how much you can save on interest by paying off your car loan early. It calculates your remaining balance, interest savings, and new payoff timeline based on your loan details and prepayment plans.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Auto Payoff Calculator</h2>
+                <p>An auto payoff calculator is a tool that estimates the impact of early payments on your car loan. It shows how much time and money you can save by making extra payments or paying off your loan ahead of schedule.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Auto Loan Early Payoff Calculator</h2>
+                <p>An auto loan early payoff calculator allows you to see the benefits of paying off your car loan before the original term ends. It calculates your interest savings and how early you can be debt-free.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Auto Early Payoff Calculator</h2>
+                <p>An auto early payoff calculator helps you plan an early payoff for your car loan. By entering your loan details and prepayment amounts, you can see how much interest you’ll save and how quickly you can pay off your loan.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Early Payoff Auto Loan Calculator</h2>
+                <p>An early payoff auto loan calculator is designed to show the financial benefits of paying off your car loan early. It provides insights into your remaining balance, interest savings, and adjusted loan term.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Auto Loan Payoff Early Calculator</h2>
+                <p>An auto loan payoff early calculator helps you understand the savings from paying off your car loan ahead of schedule. It calculates your new payoff date and the amount of interest you can save with early payments.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Loan Payoff Calculator Auto</h2>
+                <p>A loan payoff calculator for auto loans helps you analyze the effects of making extra payments on your car loan. It shows your remaining balance, interest savings, and how much faster you can pay off your loan.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Payoff Auto Loan Early Calculator</h2>
+                <p>A payoff auto loan early calculator is a tool to estimate the savings from paying off your car loan early. It calculates your interest savings and new loan term based on your prepayment strategy.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Payoff Calculator Auto Loan</h2>
+                <p>A payoff calculator for an auto loan helps you determine how much you can save by paying off your car loan early. It provides a detailed breakdown of your interest savings and remaining loan term.</p>
+            </section>
+
+            <section class="keyword-section">
+                <h2>Early Auto Loan Payoff Calculator</h2>
+                <p>An early auto loan payoff calculator shows you how much you can save by paying off your car loan early. It calculates your interest savings, remaining balance, and the new timeline for paying off your loan.</p>
+            </section>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p>© 2025 calculator-app.org. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
