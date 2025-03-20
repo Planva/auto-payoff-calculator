@@ -29,12 +29,12 @@
                 <option value="ha">Hausa</option>
             </select>
         </div>
-        <h1>Auto Payoff Calculator</h1>
-        <p>Calculate your car loan payoff and savings easily.</p>
+        <h1 title="auto payoff calculator">Auto Payoff Calculator</h1>
+        <p title="Calculate your car loan payoff and savings easily.">Calculate your car loan payoff and savings easily.</p>
         <nav>
             <ul>
-                <li><a href="#payoff-calculator" id="payoff-tab" class="active">Payoff Calculator</a></li>
-                <li><a href="#loan-calculator" id="loan-tab">Loan Calculator</a></li>
+                <li><a href="#payoff-calculator" id="payoff-tab" class="active" title="auto payoff calculator">Payoff Calculator</a></li>
+                <li><a href="#loan-calculator" id="loan-tab" title="auto Loan calculator">Loan Calculator</a></li>
             </ul>
         </nav>
     </header>
@@ -43,7 +43,7 @@
         <!-- Payoff Calculator Section -->
         <section id="payoff-calculator" class="calculator-section">
             <div class="calculator-form">
-                <h2>Prepayment Calculation</h2>
+                <h2 title="auto payoff calculator">Prepayment Calculation</h2>
                 <form id="payoff-form">
                     <div class="form-group">
                         <label for="payoff-loan-amount">Loan Amount ($):</label>
@@ -395,5 +395,16 @@
     </footer>
 
     <script src="script.js"></script>
+    <div style="display: none;">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMFMZMPJ0S"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-KMFMZMPJ0S');
+        </script>
+    </div>
 </body>
 </html>
